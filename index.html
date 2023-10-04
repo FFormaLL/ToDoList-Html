@@ -1,27 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+<style>
+  ul {
+    text-align: left;
+  }
+
+  @media (min-width:320px) {
+    body {
+      text-align: center;
+      border-style: solid;
+      border-width: medium;
+      border-radius: 12px;
+      padding-bottom: 32px;
+      background-color: lightblue;
+    }
+  }
+</style>
+
 <body>
-    <ul id="list"></ul>
-    <input id="input"></input>
-    <button onclick="updateArray()">send</button>
+  <h2>ToDo List</h2>
+  <ul id="list"></ul>
+  <input id="input"></input>
+  <button id="send" onclick="updateArray()">send</button>
 </body>
 
 <script>
-    var toDoList = []
-    function updateArray() {
-        var li = document.createElement("li")
-        var toDo = document.getElementById("input").value
-        var t = document.createTextNode(toDo)
-        li.appendChild(t)
-        console.log(li)
-        document.getElementById("list").appendChild(li)
-        document.getElementById("input").value = ""
-        
+  var toDoList = []
+  function updateArray() {
+    var li = document.createElement("li")
+    var toDo = document.getElementById("input").value
+    var t = document.createTextNode(toDo)
+    li.appendChild(t)
+    console.log(li)
+    if (toDo === "") {
+      alert("Input cannot be blank")
     }
+    else {
+      document.getElementById("list").appendChild(li)
+    }
+    document.getElementById("input").value = ""
+
+  }
+
+  $("#send").keypress(updateArray)
+
 </script>
+
 </html>
