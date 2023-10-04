@@ -45,10 +45,14 @@
       document.getElementById("list").appendChild(li)
     }
     document.getElementById("input").value = ""
-
+    input.ActivateInputField();
   }
 
-  $("#send").keypress(updateArray)
+  input.addEventListener("keydown", function (e) {
+    if (e.code === "Enter") { 
+      updateArray(e);
+    }
+  });
 
 </script>
 
