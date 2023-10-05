@@ -23,7 +23,7 @@
   }
 </style>
 
-<body>
+<body onload="getToDoList()">
   <h2>ToDo List</h2>
   <ul id="list"></ul>
   <input id="input"></input>
@@ -32,6 +32,8 @@
 
 <script>
   var toDoList = []
+  var list = document.getElementById("list")
+  
   function updateArray() {
     var li = document.createElement("li")
     var toDo = document.getElementById("input").value
@@ -45,14 +47,34 @@
       document.getElementById("list").appendChild(li)
     }
     document.getElementById("input").value = ""
-    input.ActivateInputField();
+    input.focus();
   }
 
   input.addEventListener("keydown", function (e) {
-    if (e.code === "Enter") { 
+    if (e.code === "Enter") {
       updateArray(e);
     }
   });
+
+
+
+  function getToDoList() {
+    fetch("http://localhost:8000/api/todolist")
+      .then((Response) => Response.json())
+      .then((data) => {
+        data.forEach((item) => {
+          var li = document.createElement("li");
+          li.textContent = `${item.toDo}`;
+          list.appendChild(li);
+        });
+      })
+      .catch((error) => {
+        console.error("Error:", error)
+      })
+  }
+
+
+
 
 </script>
 
